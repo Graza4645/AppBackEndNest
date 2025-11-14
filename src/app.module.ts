@@ -13,7 +13,18 @@ import { DeploymentCheckOnlyModule } from './deployment-check-only/deployment-ch
 
 
 @Module({
-  imports: [/* TypeOrmModule.forRoot(dataSourceOptions), */ DeploymentCheckOnlyModule],
+  imports: [
+    TypeOrmModule.forRoot(dataSourceOptions),
+    AdmissionEnquiryModule,
+    VisitorStudentModule,
+    VisitorstaffModule,
+    StaffListModule,
+    CallLogsModule,
+    PostalDispatchModule,
+    ComplaintModule,
+    PostalReceiveModule,
+    DeploymentCheckOnlyModule
+  ],
   controllers: [],
   providers: [],
 })
