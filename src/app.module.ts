@@ -17,6 +17,7 @@ import { SupabaseModule } from './supabase/supabase.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    SupabaseModule,
     DeploymentCheckOnlyModule
   ],
   controllers: [],
