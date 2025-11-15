@@ -22,16 +22,6 @@ import { CallLog } from './call-logs/entities/call-log.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: process.env.SUPABASE_DATABASE_URL,
-      entities: [Visitorstaff],
-      synchronize: true,
-      ssl: { rejectUnauthorized: false },
-      logging: false,
-      extra: { connectionLimit: 1 }
-    }),
-    VisitorstaffModule,
     DeploymentCheckOnlyModule
   ],
   controllers: [],

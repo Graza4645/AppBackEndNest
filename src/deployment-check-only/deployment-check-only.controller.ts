@@ -54,7 +54,6 @@ export class DeploymentCheckOnlyController {
         process.env.SUPABASE_ANON_KEY || ''
       );
       
-      // Simple connection test
       const { data, error } = await supabase.auth.getSession();
       
       return { 
@@ -68,6 +67,43 @@ export class DeploymentCheckOnlyController {
         connected: false,
         error: err.message 
       };
+    }
+  }
+
+  @Post('visitorstaff')
+  async createVisitorstaff(@Body() data: any) {
+    try {
+      const supabase = createClient(
+        process.env.SUPABASE_URL || '',
+        process.env.SUPABASE_ANON_KEY || ''
+      );
+      
+      const { data: result, error } = await supabase
+        .from('visitorstaff')
+        .insert(data)
+        .select();
+      
+      return { success: !error, data: result, error: error?.message };
+    } catch (err) {
+      return { success: false, error: err.message };
+    }
+  }
+
+  @Get('visitorstaff')
+  async getVisitorstaff() {
+    try {
+      const supabase = createClient(
+        process.env.SUPABASE_URL || '',
+        process.env.SUPABASE_ANON_KEY || ''
+      );
+      
+      const { data, error } = await supabase
+        .from('visitorstaff')
+        .select('*');
+      
+      return { success: !error, data, error: error?.message };
+    } catch (err) {
+      return { success: false, error: err.message };
     }
   }
 
