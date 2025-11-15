@@ -17,7 +17,10 @@ import { SupabaseModule } from './supabase/supabase.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot(dataSourceOptions),
+    ...(process.env.USE_SUPABASE === 'true' ? 
+      [TypeOrmModule.forRoot(dataSourceOptions)] : 
+      []
+    ),
     SupabaseModule,
     AdmissionEnquiryModule,
     VisitorStudentModule,
