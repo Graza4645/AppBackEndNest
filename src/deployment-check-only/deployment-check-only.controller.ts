@@ -2,9 +2,13 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DeploymentCheckOnlyService } from './deployment-check-only.service';
 import { CreateDeploymentCheckOnlyDto } from './dto/create-deployment-check-only.dto';
 import { UpdateDeploymentCheckOnlyDto } from './dto/update-deployment-check-only.dto';
+<<<<<<< HEAD
 import { createClient } from '@supabase/supabase-js';
 import { DataSource } from 'typeorm';
 import { InjectDataSource } from '@nestjs/typeorm';
+=======
+// import { createClient } from '@supabase/supabase-js'; // Uncomment after installing supabase
+>>>>>>> 2c7be67d64ad3a4dc06ce85cc7c4e9afdb926f77
 
 @Controller('deployment')
 export class DeploymentCheckOnlyController {
@@ -63,30 +67,9 @@ export class DeploymentCheckOnlyController {
     };
   }
 
-  @Get('supabase-test')
-  async testSupabase() {
-    try {
-      const supabase = createClient(
-        process.env.SUPABASE_URL || '',
-        process.env.SUPABASE_ANON_KEY || ''
-      );
-      
-      // Simple connection test
-      const { data, error } = await supabase.auth.getSession();
-      
-      return { 
-        status: 'Supabase connection successful',
-        connected: true,
-        message: 'Ready for database operations'
-      };
-    } catch (err) {
-      return { 
-        status: 'Supabase connection failed',
-        connected: false,
-        error: err.message 
-      };
-    }
-  }
+
+
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
@@ -102,4 +85,6 @@ export class DeploymentCheckOnlyController {
   remove(@Param('id') id: string) {
     return this.deploymentCheckOnlyService.remove(+id);
   }
+
+
 }
