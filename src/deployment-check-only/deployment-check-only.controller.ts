@@ -2,10 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DeploymentCheckOnlyService } from './deployment-check-only.service';
 import { CreateDeploymentCheckOnlyDto } from './dto/create-deployment-check-only.dto';
 import { UpdateDeploymentCheckOnlyDto } from './dto/update-deployment-check-only.dto';
+import { SupabaseService } from '../supabase/supabase.service';
 
 @Controller('deployment')
 export class DeploymentCheckOnlyController {
-  constructor(private readonly deploymentCheckOnlyService: DeploymentCheckOnlyService) {}
+  constructor(
+    private readonly deploymentCheckOnlyService: DeploymentCheckOnlyService,
+    private readonly supabaseService: SupabaseService
+  ) {}
 
   @Post()
   create(@Body() createDeploymentCheckOnlyDto: CreateDeploymentCheckOnlyDto) {
@@ -20,6 +24,27 @@ export class DeploymentCheckOnlyController {
   @Get('health')
   health() {
     return { status: 'OK', message: 'Server is running' };
+  }
+
+  @Get('supabase-test')
+  async testSupabase() {
+    try {
+      const { data, error } = await this.supabaseService.client
+        .from('test')
+        .select('*')
+        .limit(1);
+      
+      return { 
+        status: 'Supabase connected', 
+        hasError: !!error,
+        error: error?.message || null
+      };
+    } catch (err) {
+      return { 
+        status: 'Supabase connection failed', 
+        error: err.message 
+      };
+    }
   }
 
   @Get(':id')
