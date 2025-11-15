@@ -22,34 +22,6 @@ import { CallLog } from './call-logs/entities/call-log.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    ...(process.env.NODE_ENV === 'production' && process.env.SUPABASE_DATABASE_URL ? [
-      TypeOrmModule.forRoot({
-        type: 'postgres',
-        url: process.env.SUPABASE_DATABASE_URL,
-        entities: [Visitorstaff, VisitorStudent, AdmissionEnquiryEntity, StaffList, CallLog],
-        synchronize: true,
-        ssl: { rejectUnauthorized: false },
-        logging: false,
-        extra: { connectionLimit: 1 }
-      })
-    ] : process.env.USE_SUPABASE === 'true' ? [
-      TypeOrmModule.forRoot({
-        type: 'postgres',
-        url: process.env.SUPABASE_DATABASE_URL,
-        entities: [Visitorstaff, VisitorStudent, AdmissionEnquiryEntity, StaffList, CallLog],
-        synchronize: true,
-        ssl: { rejectUnauthorized: false },
-        logging: true,
-        extra: { connectionLimit: 1 }
-      })
-    ] : []),
-    ...(process.env.SUPABASE_DATABASE_URL ? [
-      AdmissionEnquiryModule,
-      VisitorStudentModule,
-      VisitorstaffModule,
-      StaffListModule,
-      CallLogsModule
-    ] : []),
     DeploymentCheckOnlyModule
   ],
   controllers: [],
