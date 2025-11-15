@@ -2,13 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DeploymentCheckOnlyService } from './deployment-check-only.service';
 import { CreateDeploymentCheckOnlyDto } from './dto/create-deployment-check-only.dto';
 import { UpdateDeploymentCheckOnlyDto } from './dto/update-deployment-check-only.dto';
-<<<<<<< HEAD
 import { createClient } from '@supabase/supabase-js';
 import { DataSource } from 'typeorm';
 import { InjectDataSource } from '@nestjs/typeorm';
-=======
-// import { createClient } from '@supabase/supabase-js'; // Uncomment after installing supabase
->>>>>>> 2c7be67d64ad3a4dc06ce85cc7c4e9afdb926f77
 
 @Controller('deployment')
 export class DeploymentCheckOnlyController {
@@ -67,10 +63,6 @@ export class DeploymentCheckOnlyController {
     };
   }
 
-
-
-
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.deploymentCheckOnlyService.findOne(+id);
@@ -85,6 +77,4 @@ export class DeploymentCheckOnlyController {
   remove(@Param('id') id: string) {
     return this.deploymentCheckOnlyService.remove(+id);
   }
-
-
 }
