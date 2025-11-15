@@ -12,6 +12,11 @@ import { ComplaintModule } from './complaint/complaint.module';
 import { PostalReceiveModule } from './postal-receive/postal-receive.module';
 import { DeploymentCheckOnlyModule } from './deployment-check-only/deployment-check-only.module';
 import { SupabaseModule } from './supabase/supabase.module';
+import { Visitorstaff } from './visitorstaff/entities/visitorstaff.entity';
+import { VisitorStudent } from './visitor-student/entities/visitor-student.entity';
+import { AdmissionEnquiryEntity } from './admission-enquiry/entities/admission-enquiry.entity';
+import { StaffList } from './staff-list/entities/staff-list.entity';
+import { CallLog } from './call-logs/entities/call-log.entity';
 
 
 @Module({
@@ -19,17 +24,29 @@ import { SupabaseModule } from './supabase/supabase.module';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.SUPABASE_DATABASE_URL,
-      entities: process.env.NODE_ENV === 'production' 
-        ? ['dist/**/*.entity.js'] 
-        : ['src/**/*.entity.ts'],
+      ...(process.env.USE_SUPABASE === 'true' ? {
+        // Supabase connection from .env
+        url: process.env.SUPABASE_DATABASE_URL,
+        ssl: { rejectUnauthorized: false },
+      } : {
+        // Local PostgreSQL connection from .env
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT),
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+      }),
+      entities: [
+        Visitorstaff,
+        VisitorStudent,
+        AdmissionEnquiryEntity,
+        StaffList,
+        CallLog
+      ],
       synchronize: true,
-      ssl: { rejectUnauthorized: false },
-      logging: false,
+      logging: process.env.NODE_ENV !== 'production',
       extra: {
         connectionLimit: 1,
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 2000,
       }
     }),
     AdmissionEnquiryModule,
@@ -37,9 +54,6 @@ import { SupabaseModule } from './supabase/supabase.module';
     VisitorstaffModule,
     StaffListModule,
     CallLogsModule,
-    PostalDispatchModule,
-    ComplaintModule,
-    PostalReceiveModule,
     DeploymentCheckOnlyModule
   ],
   controllers: [],

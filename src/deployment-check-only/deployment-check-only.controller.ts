@@ -20,7 +20,20 @@ export class DeploymentCheckOnlyController {
 
   @Get('health')
   health() {
-    return { status: 'OK', message: 'Server is running' };
+    return {
+      status: 'OK',
+      message: 'Server is running',
+      environment: process.env.NODE_ENV,
+      database: process.env.USE_SUPABASE === 'true' ? 'Supabase' : 'Local PostgreSQL',
+      timestamp: new Date().toISOString(),
+      endpoints: [
+        '/api/v1/admission-enquiry',
+        '/api/v1/visitor-student',
+        '/api/v1/visitorstaff',
+        '/api/v1/staff-list',
+        '/api/v1/call-logs'
+      ]
+    };
   }
 
   @Get('env-check')
