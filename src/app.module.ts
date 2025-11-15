@@ -25,7 +25,14 @@ import { SupabaseModule } from './supabase/supabase.module';
       ssl: { rejectUnauthorized: false },
       extra: { connectionLimit: 1 }
     }),
+    AdmissionEnquiryModule,
+    VisitorStudentModule,
     VisitorstaffModule,
+    StaffListModule,
+    CallLogsModule,
+    PostalDispatchModule,
+    ComplaintModule,
+    PostalReceiveModule,
     DeploymentCheckOnlyModule
   ],
   controllers: [],
