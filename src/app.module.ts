@@ -17,22 +17,16 @@ import { SupabaseModule } from './supabase/supabase.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: process.env.SUPABASE_DATABASE_URL,
-      entities: ['dist/**/*.entity.js'],
-      synchronize: true,
-      ssl: { rejectUnauthorized: false },
-      extra: { connectionLimit: 1 }
-    }),
-    AdmissionEnquiryModule,
-    VisitorStudentModule,
-    VisitorstaffModule,
-    StaffListModule,
-    CallLogsModule,
-    PostalDispatchModule,
-    ComplaintModule,
-    PostalReceiveModule,
+    ...(process.env.SUPABASE_DATABASE_URL ? [
+      TypeOrmModule.forRoot({
+        type: 'postgres',
+        url: process.env.SUPABASE_DATABASE_URL,
+        entities: ['dist/**/*.entity.js'],
+        synchronize: true,
+        ssl: { rejectUnauthorized: false },
+        extra: { connectionLimit: 1 }
+      })
+    ] : []),
     DeploymentCheckOnlyModule
   ],
   controllers: [],
