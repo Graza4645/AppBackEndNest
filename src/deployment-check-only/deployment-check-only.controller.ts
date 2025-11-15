@@ -14,7 +14,12 @@ export class DeploymentCheckOnlyController {
 
   @Get()
   findAll() {
-    return this.deploymentCheckOnlyService.findAll();
+    return { message: 'Deployment successful!', timestamp: new Date().toISOString() };
+  }
+
+  @Get('health')
+  health() {
+    return { status: 'OK', message: 'Server is running' };
   }
 
   @Get(':id')
