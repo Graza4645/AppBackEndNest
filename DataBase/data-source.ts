@@ -14,11 +14,14 @@ export const dataSourceOptions:DataSourceOptions={
     username: useSupabase ? undefined : process.env.DB_USERNAME,
     password: useSupabase ? undefined : process.env.DB_PASSWORD,
     database: useSupabase ? undefined : process.env.DB_NAME,
-    entities:['dist/**/*.entity.js'],
-    migrations:['dist/DB/migrations/*{.ts,.js}'],
-    synchronize:true,
-    logging:false,
+    entities: isProduction ? ['dist/**/*.entity.js'] : ['src/**/*.entity.ts'],
+    migrations: isProduction ? ['dist/DB/migrations/*{.ts,.js}'] : ['src/DB/migrations/*{.ts,.js}'],
+    synchronize: !isProduction,
+    logging: false,
     ssl: isProduction || useSupabase ? { rejectUnauthorized: false } : false,
+    extra: {
+        connectionLimit: 1,
+    },
 }
 
 const dataSource = new DataSource(dataSourceOptions);
