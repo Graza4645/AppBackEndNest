@@ -3,18 +3,22 @@ import {config} from 'dotenv'
 
 config(); // Load environment variables
 
+const isProduction = process.env.NODE_ENV === 'production';
+const useSupabase = process.env.USE_SUPABASE === 'true';
+
 export const dataSourceOptions:DataSourceOptions={
     type:'postgres',
-    host:process.env.DB_HOST,
-    port:Number(process.env.DB_PORT),
-    username:process.env.DB_USERNAME,
-    password:process.env.DB_PASSWORD,
-    database:process.env.DB_NAME,
+    url: useSupabase ? process.env.SUPABASE_DATABASE_URL : undefined,
+    host: useSupabase ? undefined : process.env.DB_HOST,
+    port: useSupabase ? undefined : Number(process.env.DB_PORT),
+    username: useSupabase ? undefined : process.env.DB_USERNAME,
+    password: useSupabase ? undefined : process.env.DB_PASSWORD,
+    database: useSupabase ? undefined : process.env.DB_NAME,
     entities:['dist/**/*.entity.js'],
     migrations:['dist/DB/migrations/*{.ts,.js}'],
     synchronize:true,
     logging:false,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    ssl: isProduction || useSupabase ? { rejectUnauthorized: false } : false,
 }
 
 const dataSource = new DataSource(dataSourceOptions);
