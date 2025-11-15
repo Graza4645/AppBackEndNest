@@ -17,6 +17,15 @@ import { SupabaseModule } from './supabase/supabase.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.SUPABASE_DATABASE_URL,
+      entities: ['dist/**/*.entity.js'],
+      synchronize: true,
+      ssl: { rejectUnauthorized: false },
+      extra: { connectionLimit: 1 }
+    }),
+    VisitorstaffModule,
     DeploymentCheckOnlyModule
   ],
   controllers: [],
