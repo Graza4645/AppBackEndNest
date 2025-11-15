@@ -22,38 +22,34 @@ import { CallLog } from './call-logs/entities/call-log.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      ...(process.env.USE_SUPABASE === 'true' ? {
-        // Supabase connection from .env
+    ...(process.env.NODE_ENV === 'production' && process.env.SUPABASE_DATABASE_URL ? [
+      TypeOrmModule.forRoot({
+        type: 'postgres',
         url: process.env.SUPABASE_DATABASE_URL,
+        entities: [Visitorstaff, VisitorStudent, AdmissionEnquiryEntity, StaffList, CallLog],
+        synchronize: true,
         ssl: { rejectUnauthorized: false },
-      } : {
-        // Local PostgreSQL connection from .env
-        host: process.env.DB_HOST,
-        port: Number(process.env.DB_PORT),
-        username: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-      }),
-      entities: [
-        Visitorstaff,
-        VisitorStudent,
-        AdmissionEnquiryEntity,
-        StaffList,
-        CallLog
-      ],
-      synchronize: true,
-      logging: process.env.NODE_ENV !== 'production',
-      extra: {
-        connectionLimit: 1,
-      }
-    }),
-    AdmissionEnquiryModule,
-    VisitorStudentModule,
-    VisitorstaffModule,
-    StaffListModule,
-    CallLogsModule,
+        logging: false,
+        extra: { connectionLimit: 1 }
+      })
+    ] : process.env.USE_SUPABASE === 'true' ? [
+      TypeOrmModule.forRoot({
+        type: 'postgres',
+        url: process.env.SUPABASE_DATABASE_URL,
+        entities: [Visitorstaff, VisitorStudent, AdmissionEnquiryEntity, StaffList, CallLog],
+        synchronize: true,
+        ssl: { rejectUnauthorized: false },
+        logging: true,
+        extra: { connectionLimit: 1 }
+      })
+    ] : []),
+    ...(process.env.SUPABASE_DATABASE_URL ? [
+      AdmissionEnquiryModule,
+      VisitorStudentModule,
+      VisitorstaffModule,
+      StaffListModule,
+      CallLogsModule
+    ] : []),
     DeploymentCheckOnlyModule
   ],
   controllers: [],
