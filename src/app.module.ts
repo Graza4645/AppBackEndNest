@@ -20,7 +20,9 @@ import { SupabaseModule } from './supabase/supabase.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.SUPABASE_DATABASE_URL,
-      entities: ['dist/**/*.entity.js'],
+      entities: process.env.NODE_ENV === 'production' 
+        ? ['dist/**/*.entity.js'] 
+        : ['src/**/*.entity.ts'],
       synchronize: true,
       ssl: { rejectUnauthorized: false },
       logging: false,
