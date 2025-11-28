@@ -10,10 +10,10 @@ export class AdmissionEnquiryEntity {
   @Column({ type: 'varchar', length: 100 })
   name: string;
 
-  @Column({ type: 'varchar', length: 15 })
+  @Column({ type: 'varchar', length: 15 ,  unique : true})
   phone: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column({ type: 'varchar', length: 100, nullable: true,  unique : true })
   email: string;
 
   @Column({ type: 'text', nullable: true })

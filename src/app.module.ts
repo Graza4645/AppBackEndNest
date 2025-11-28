@@ -9,10 +9,11 @@ import { CallLogsModule } from './call-logs/call-logs.module';
 import { PostalDispatchModule } from './postal-dispatch/postal-dispatch.module';
 import { ComplaintModule } from './complaint/complaint.module';
 import { PostalReceiveModule } from './postal-receive/postal-receive.module';
+import { RoomTypeModule } from './room-type/room-type.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dataSourceOptions),AdmissionEnquiryModule, VisitorStudentModule, VisitorstaffModule, StaffListModule, CallLogsModule, PostalDispatchModule, ComplaintModule, PostalReceiveModule],
+  imports: [TypeOrmModule.forRoot(dataSourceOptions),AdmissionEnquiryModule, VisitorStudentModule, VisitorstaffModule, StaffListModule, CallLogsModule, PostalDispatchModule, ComplaintModule, PostalReceiveModule, RoomTypeModule],
   controllers: [],
   providers: [],
 })
