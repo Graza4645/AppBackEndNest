@@ -11,10 +11,11 @@ import { ComplaintModule } from './complaint/complaint.module';
 import { PostalReceiveModule } from './postal-receive/postal-receive.module';
 import { RoomTypeModule } from './room-type/room-type.module';
 import { HostelModule } from './hostel/hostel.module';
+import { HostalRoomModule } from './hostal-room/hostal-room.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dataSourceOptions),AdmissionEnquiryModule, VisitorStudentModule, VisitorstaffModule, StaffListModule, CallLogsModule, PostalDispatchModule, ComplaintModule, PostalReceiveModule, RoomTypeModule, HostelModule],
+  imports: [TypeOrmModule.forRoot(dataSourceOptions),AdmissionEnquiryModule, VisitorStudentModule, VisitorstaffModule, StaffListModule, CallLogsModule, PostalDispatchModule, ComplaintModule, PostalReceiveModule, RoomTypeModule, HostelModule, HostalRoomModule],
   controllers: [],
   providers: [],
 })
