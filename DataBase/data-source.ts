@@ -56,7 +56,7 @@ export const dataSourceOptions:DataSourceOptions={
     ...dbConfig,
     entities: [Visitorstaff, AdmissionEnquiryEntity, VisitorStudent, StaffList, CallLog, PostalDispatch, Complaint, PostalReceive, RoomTypeEntity, HostelEntity, HostalRoomEntity],
     migrations:['dist/DB/migrations/*{.ts,.js}'],
-    synchronize: !isProduction, // Only sync in development
+    synchronize: true, // Create tables automatically
     logging: !isProduction,
 }
 
