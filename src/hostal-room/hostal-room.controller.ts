@@ -2,24 +2,24 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, HttpCo
 import { HostalRoomService } from './hostal-room.service';
 import { CreateHostalRoomDto } from './dto/create-hostal-room.dto';
 import { UpdateHostalRoomDto } from './dto/update-hostal-room.dto';
-import { HostalRoomEntiry } from './entities/hostal-room.entity';
+import { HostalRoomEntity } from './entities/hostal-room.entity';
 
 @Controller('hostal-room')
 export class HostalRoomController {
   constructor(private readonly hostalRoomService: HostalRoomService) {}
 
   @Post()
-  async create(@Body() createHostalRoomDto: CreateHostalRoomDto): Promise<HostalRoomEntiry> {
+  async create(@Body() createHostalRoomDto: CreateHostalRoomDto): Promise<HostalRoomEntity> {
     return await this.hostalRoomService.create(createHostalRoomDto);
   }
 
   @Get()
-  async findAll(): Promise<HostalRoomEntiry[]> {
+  async findAll(): Promise<HostalRoomEntity[]> {
     return await this.hostalRoomService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number): Promise<HostalRoomEntiry> {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<HostalRoomEntity> {
     return await this.hostalRoomService.findOne(id);
   }
 
@@ -27,7 +27,7 @@ export class HostalRoomController {
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateHostalRoomDto: UpdateHostalRoomDto,
-  ): Promise<HostalRoomEntiry> {
+  ): Promise<HostalRoomEntity> {
     return await this.hostalRoomService.update(id, updateHostalRoomDto);
   }
 

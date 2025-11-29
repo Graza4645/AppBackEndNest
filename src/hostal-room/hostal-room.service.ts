@@ -3,16 +3,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateHostalRoomDto } from './dto/create-hostal-room.dto';
 import { UpdateHostalRoomDto } from './dto/update-hostal-room.dto';
-import { HostalRoomEntiry } from './entities/hostal-room.entity';
+import { HostalRoomEntity } from './entities/hostal-room.entity';
 
 @Injectable()
 export class HostalRoomService {
   constructor(
-    @InjectRepository(HostalRoomEntiry)
-    private hostalRoomRepository: Repository<HostalRoomEntiry>,
+    @InjectRepository(HostalRoomEntity)
+    private hostalRoomRepository: Repository<HostalRoomEntity>,
   ) {}
 
-  async create(createHostalRoomDto: CreateHostalRoomDto): Promise<HostalRoomEntiry> {
+  async create(createHostalRoomDto: CreateHostalRoomDto): Promise<HostalRoomEntity> {
     const hostalRoom = this.hostalRoomRepository.create({
       room_name: createHostalRoomDto.room_name,
       hostel: { id: createHostalRoomDto.hostel_id },
@@ -24,13 +24,13 @@ export class HostalRoomService {
     return await this.hostalRoomRepository.save(hostalRoom);
   }
 
-  async findAll(): Promise<HostalRoomEntiry[]> {
+  async findAll(): Promise<HostalRoomEntity[]> {
     return await this.hostalRoomRepository.find({ 
       relations: ['hostel', 'room_type'] 
     });
   }
 
-  async findOne(id: number): Promise<HostalRoomEntiry> {
+  async findOne(id: number): Promise<HostalRoomEntity> {
     const hostalRoom = await this.hostalRoomRepository.findOne({
       where: { id },
       relations: ['hostel', 'room_type'],
@@ -41,7 +41,7 @@ export class HostalRoomService {
     return hostalRoom;
   }
 
-  async update(id: number, updateHostalRoomDto: UpdateHostalRoomDto): Promise<HostalRoomEntiry> {
+  async update(id: number, updateHostalRoomDto: UpdateHostalRoomDto): Promise<HostalRoomEntity> {
     const hostalRoom = await this.findOne(id);
     
     if (updateHostalRoomDto.hostel_id) {

@@ -11,8 +11,8 @@ import {
 import { HostelEntity } from '../../hostel/entities/hostel.entity';
 import { RoomTypeEntity } from '../../room-type/entities/room-type.entity'; 
 
-@Entity()
-export class HostalRoomEntiry {
+@Entity('hostal_room')
+export class HostalRoomEntity {
 
   @PrimaryGeneratedColumn()
   id: number;
