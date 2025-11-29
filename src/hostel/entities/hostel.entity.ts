@@ -1,6 +1,6 @@
 
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { RoomTypeEntity } from 'src/room-type/entities/room-type.entity'; 
+import { RoomTypeEntity } from '../../room-type/entities/room-type.entity'; 
 
 @Entity('hostel')
 export class HostelEntity {
