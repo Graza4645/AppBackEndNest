@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
-@Entity()
-export class RoomType {
+@Entity('room_type')
+export class RoomTypeEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

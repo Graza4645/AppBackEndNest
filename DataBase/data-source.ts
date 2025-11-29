@@ -8,6 +8,8 @@ import { CallLog } from '../src/call-logs/entities/call-log.entity'
 import { PostalDispatch } from '../src/postal-dispatch/entities/postal-dispatch.entity'
 import { Complaint } from '../src/complaint/entities/complaint.entity'
 import { PostalReceive } from '../src/postal-receive/entities/postal-receive.entity'
+import { RoomTypeEntity } from '../src/room-type/entities/room-type.entity'
+import { HostelEntity } from '../src/hostel/entities/hostel.entity'
 
 config(); // Load environment variables
 
@@ -51,7 +53,7 @@ console.log(`   Environment: ${process.env.NODE_ENV}`);
 export const dataSourceOptions:DataSourceOptions={
     type:'postgres',
     ...dbConfig,
-    entities: [Visitorstaff, AdmissionEnquiryEntity, VisitorStudent, StaffList, CallLog, PostalDispatch, Complaint, PostalReceive],
+    entities: [Visitorstaff, AdmissionEnquiryEntity, VisitorStudent, StaffList, CallLog, PostalDispatch, Complaint, PostalReceive, RoomTypeEntity, HostelEntity],
     migrations:['dist/DB/migrations/*{.ts,.js}'],
     synchronize: !isProduction, // Only sync in development
     logging: !isProduction,
