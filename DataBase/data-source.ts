@@ -11,6 +11,10 @@ import { PostalReceive } from '../src/postal-receive/entities/postal-receive.ent
 import { RoomTypeEntity } from '../src/room-type/entities/room-type.entity'
 import { HostelEntity } from '../src/hostel/entities/hostel.entity'
 import { HostalRoomEntity } from '../src/hostal-room/entities/hostal-room.entity'
+import { FrontOfficePurpose } from '../src/front-office-set-up/entities/front-office-purpose.entity'
+import { FrontOfficeComplainType } from '../src/front-office-set-up/entities/front-office-complain-type.entity'
+import { FrontOfficeSource } from '../src/front-office-set-up/entities/front-office-source.entity'
+import { FrontOfficeReference } from '../src/front-office-set-up/entities/front-office-reference.entity'
 
 config(); // Load environment variables
 
@@ -54,9 +58,9 @@ console.log(`   Environment: ${process.env.NODE_ENV}`);
 export const dataSourceOptions:DataSourceOptions={
     type:'postgres',
     ...dbConfig,
-    entities: [Visitorstaff, AdmissionEnquiryEntity, VisitorStudent, StaffList, CallLog, PostalDispatch, Complaint, PostalReceive, RoomTypeEntity, HostelEntity, HostalRoomEntity],
+    entities: [Visitorstaff, AdmissionEnquiryEntity, VisitorStudent, StaffList, CallLog, PostalDispatch, Complaint, PostalReceive, RoomTypeEntity, HostelEntity, HostalRoomEntity, FrontOfficePurpose, FrontOfficeComplainType, FrontOfficeSource, FrontOfficeReference],
     migrations:['dist/DB/migrations/*{.ts,.js}'],
-    synchronize: true, // Create tables automatically
+    synchronize: !isProduction, // Only sync in development
     logging: !isProduction,
 }
 
