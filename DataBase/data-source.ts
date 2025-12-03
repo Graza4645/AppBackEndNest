@@ -60,7 +60,7 @@ export const dataSourceOptions:DataSourceOptions={
     ...dbConfig,
     entities: [Visitorstaff, AdmissionEnquiryEntity, VisitorStudent, StaffList, CallLog, PostalDispatch, Complaint, PostalReceive, RoomTypeEntity, HostelEntity, HostalRoomEntity, FrontOfficePurpose, FrontOfficeComplainType, FrontOfficeSource, FrontOfficeReference],
     migrations:['dist/DB/migrations/*{.ts,.js}'],
-    synchronize: true, // Temporarily enabled to create new tables
+    synchronize: true, // Auto-create tables for new blank database
     logging: !isProduction,
 }
 
