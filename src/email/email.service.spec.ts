@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateEmailDto } from './dto/create-email.dto';
+import { CreateEmailPdfDto } from './dto/create-email.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EmailLog } from './entities/email.entity';
@@ -25,8 +25,10 @@ export class EmailService {
     });
   }
 
-  async create(dto: CreateEmailDto) {
-    const { email, name } = dto;
+  async create(dto: CreateEmailPdfDto) {
+     const emailData = dto.emailData;
+     const email = emailData.email;
+     const name = emailData.name;
     if (!email || !name) throw new Error('Email and name are required');
 
     // -----------------------------
@@ -64,12 +66,26 @@ export class EmailService {
       ],
     };
 
-    try {
-      await this.transporter.sendMail(mailOptions);
-    } catch (err) {
-      console.error('Error sending email:', err);
-      throw new Error('Failed to send email: ' + err.message);
-    }
+    // try {
+    //   await this.transporter.sendMail(mailOptions);
+    // } catch (err) {
+    //   console.error('Error sending email:', err);
+    //   throw new Error('Failed to send email: ' + err.message);
+    // }
+
+
+    // Log the mail options for debugging
+console.log('Sending email with options:', mailOptions);
+
+try {
+  const info = await this.transporter.sendMail(mailOptions);
+  console.log('Email sent successfully! Message ID:', info.messageId);
+  console.log('Full info object:', info);
+} catch (err) {
+  console.error('Error sending email:', err);
+  // Re-throw or handle gracefully
+  throw new Error('Failed to send email: ' + err.message);
+}
 
     // Save email log
     await this.emailLogRepo.save({

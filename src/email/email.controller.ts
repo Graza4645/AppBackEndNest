@@ -1,14 +1,14 @@
 import { Controller, Post, Get, Param, Body, Patch, Delete } from '@nestjs/common';
 import { EmailService } from './email.service';
-import { CreateEmailDto } from './dto/create-email.dto';
+import { CreateEmailPdfDto } from './dto/create-email.dto';
 import { UpdateEmailDto } from './dto/update-email.dto';
 
 @Controller('email')
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
-  @Post()
-  create(@Body() createEmailDto: CreateEmailDto) {
+  @Post('send')
+  create(@Body() createEmailDto: CreateEmailPdfDto) {
     return this.emailService.create(createEmailDto);
     // return createEmailDto;
   }
