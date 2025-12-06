@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { EmailService } from './email.service';
 import { EmailController } from './email.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { EmailLog } from './entities/email.entity';
 
 @Module({
-  imports : [],
+  imports: [TypeOrmModule.forFeature([EmailLog])],
   controllers: [EmailController],
   providers: [EmailService],
 })

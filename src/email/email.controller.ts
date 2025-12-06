@@ -1,25 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Patch, Delete } from '@nestjs/common';
 import { EmailService } from './email.service';
 import { CreateEmailDto } from './dto/create-email.dto';
 import { UpdateEmailDto } from './dto/update-email.dto';
 
-@Controller()
+@Controller('email')
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
-
-
-  @Post('send-email')
-  async sendEmail(@Body() body: any) {
-    const { email, name } = body;
-
-    await this.emailService.sendMail(email, name);
-
-    return { message: "Email sent successfully!" };
-  }
 
   @Post()
   create(@Body() createEmailDto: CreateEmailDto) {
     return this.emailService.create(createEmailDto);
+    // return createEmailDto;
   }
 
   @Get()
@@ -34,7 +25,7 @@ export class EmailController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEmailDto: UpdateEmailDto) {
-    return this.emailService.update(+id, updateEmailDto);
+    return this.emailService.update(+id);
   }
 
   @Delete(':id')

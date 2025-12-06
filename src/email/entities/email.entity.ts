@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
 @Entity('email_logs')
-export class Email {
+export class EmailLog {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,4 +23,3 @@ export class Email {
   @CreateDateColumn()
   sent_at: Date;
 }
-

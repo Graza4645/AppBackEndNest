@@ -15,6 +15,8 @@ import { FrontOfficePurpose } from '../src/front-office-set-up/entities/front-of
 import { FrontOfficeComplainType } from '../src/front-office-set-up/entities/front-office-complain-type.entity'
 import { FrontOfficeSource } from '../src/front-office-set-up/entities/front-office-source.entity'
 import { FrontOfficeReference } from '../src/front-office-set-up/entities/front-office-reference.entity'
+import { EmailLog } from 'src/email/entities/email.entity'
+
 
 config(); // Load environment variables
 
@@ -58,7 +60,7 @@ console.log(`   Environment: ${process.env.NODE_ENV}`);
 export const dataSourceOptions:DataSourceOptions={
     type:'postgres',
     ...dbConfig,
-    entities: [Visitorstaff, AdmissionEnquiryEntity, VisitorStudent, StaffList, CallLog, PostalDispatch, Complaint, PostalReceive, RoomTypeEntity, HostelEntity, HostalRoomEntity, FrontOfficePurpose, FrontOfficeComplainType, FrontOfficeSource, FrontOfficeReference],
+    entities: [Visitorstaff, AdmissionEnquiryEntity, VisitorStudent, StaffList, CallLog, PostalDispatch, Complaint, PostalReceive, RoomTypeEntity, HostelEntity, HostalRoomEntity, FrontOfficePurpose, FrontOfficeComplainType, FrontOfficeSource, FrontOfficeReference, EmailLog],
     migrations:['dist/DB/migrations/*{.ts,.js}'],
     synchronize: true, // Auto-create tables for new blank database
     logging: !isProduction,
