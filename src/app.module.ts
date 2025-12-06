@@ -13,10 +13,11 @@ import { RoomTypeModule } from './room-type/room-type.module';
 import { HostelModule } from './hostel/hostel.module';
 import { HostalRoomModule } from './hostal-room/hostal-room.module';
 import { FrontOfficeSetUpModule } from './front-office-set-up/front-office-set-up.module';
+import { EmailModule } from './email/email.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dataSourceOptions),AdmissionEnquiryModule, VisitorStudentModule, VisitorstaffModule, StaffListModule, CallLogsModule, PostalDispatchModule, ComplaintModule, PostalReceiveModule, RoomTypeModule, HostelModule, HostalRoomModule, FrontOfficeSetUpModule],
+  imports: [TypeOrmModule.forRoot(dataSourceOptions),AdmissionEnquiryModule, VisitorStudentModule, VisitorstaffModule, StaffListModule, CallLogsModule, PostalDispatchModule, ComplaintModule, PostalReceiveModule, RoomTypeModule, HostelModule, HostalRoomModule, FrontOfficeSetUpModule, EmailModule],
   controllers: [],
   providers: [],
 })
