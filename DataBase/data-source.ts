@@ -15,7 +15,7 @@ import { FrontOfficePurpose } from '../src/front-office-set-up/entities/front-of
 import { FrontOfficeComplainType } from '../src/front-office-set-up/entities/front-office-complain-type.entity'
 import { FrontOfficeSource } from '../src/front-office-set-up/entities/front-office-source.entity'
 import { FrontOfficeReference } from '../src/front-office-set-up/entities/front-office-reference.entity'
-import { EmailLog } from 'src/email/entities/email.entity'
+import { EmailLog } from '../src/email/entities/email.entity'
 
 
 config(); // Load environment variables
