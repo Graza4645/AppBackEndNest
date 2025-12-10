@@ -57,23 +57,25 @@ export class LoginAuthService {
     };
   }
 
-  async create(createLoginAuthDto: CreateLoginAuthDto) {
-    return 'This action adds a new loginAuth';
+  // async create(createLoginAuthDto: CreateLoginAuthDto) {
+  //   return 'This action adds a new loginAuth';
+  // }
+
+  async findAll() {
+    return await this.loginRepo.find();
   }
 
-  findAll() {
-    return `This action returns all loginAuth`;
+  async findOne(id: number) {
+    return await this.loginRepo.findOne({ where: { id } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} loginAuth`;
+  async update(id: number, updateLoginAuthDto: UpdateLoginAuthDto) {
+    await this.loginRepo.update(id, updateLoginAuthDto);
+    return this.findOne(id);
   }
 
-  update(id: number, updateLoginAuthDto: UpdateLoginAuthDto) {
-    return `This action updates a #${id} loginAuth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} loginAuth`;
+  async remove(id: number) {
+    await this.loginRepo.delete(id);
+    return { message: 'User deleted successfully' };
   }
 }
