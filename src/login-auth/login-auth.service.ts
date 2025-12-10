@@ -28,7 +28,7 @@ export class LoginAuthService {
     }
 
     return {
-      message: 'Login Successful',
+      message: 'Login Successful!',
       user: {
         id: user.id,
         username: user.username,
