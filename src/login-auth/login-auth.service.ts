@@ -57,9 +57,9 @@ export class LoginAuthService {
     };
   }
 
-  // async create(createLoginAuthDto: CreateLoginAuthDto) {
-  //   return 'This action adds a new loginAuth';
-  // }
+  async create(createLoginAuthDto: CreateLoginAuthDto) {
+    return 'This action adds a new loginAuth';
+  }
 
   async findAll() {
     return await this.loginRepo.find();
